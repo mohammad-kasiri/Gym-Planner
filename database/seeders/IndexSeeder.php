@@ -10,16 +10,20 @@ class IndexSeeder extends Seeder
 {
     private $indices= [
         [
-            'title'  => 'kg',
+            'title'  => 'وزن',
+            'unit'   => 'kg',
         ],
         [
-            'title' => 'm'
+            'title'  => 'مسافت',
+            'unit'   => 'm',
         ],
         [
-            'title' => 'Reps'
+            'title'  => 'Reps',
+            'unit'   => null,
         ],
         [
-            'title' => 'min'
+            'title'  => 'زمان',
+            'unit'   => 'min',
         ],
     ];
     public function run()

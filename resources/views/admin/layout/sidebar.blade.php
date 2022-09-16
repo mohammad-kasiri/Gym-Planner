@@ -42,27 +42,27 @@
                         <span class="menu-text">پیشخوان</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('admin0') ? 'menu-item-active' : '' }}">
-                    <a  href="{{route('admin.index')}}" class="menu-link menu-toggle">
+                <li class="menu-item {{ request()->is('admin/user*') ? 'menu-item-active' : '' }}">
+                    <a  href="{{route('admin.user.index')}}" class="menu-link menu-toggle">
                         <i class="menu-icon flaticon-users-1"></i>
                         <span class="menu-text">کاربران</span>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('admin1') ? 'menu-item-active' : '' }}">
                     <a  href="{{route('admin.index')}}" class="menu-link menu-toggle">
-                        <i class="menu-icon flaticon-home"></i>
+                        <i class="menu-icon flaticon-tea-cup"></i>
                         <span class="menu-text">تمرین ها</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('admin2') ? 'menu-item-active' : '' }}">
-                    <a  href="{{route('admin.index')}}" class="menu-link menu-toggle">
-                        <i class="menu-icon flaticon-home"></i>
+                <li class="menu-item {{ request()->is('admin/type*') ? 'menu-item-active' : '' }}">
+                    <a  href="{{route('admin.type.index')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon flaticon2-cube"></i>
                         <span class="menu-text">تایپ ها</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('admin3') ? 'menu-item-active' : '' }}">
-                    <a  href="{{route('admin.index')}}" class="menu-link menu-toggle">
-                        <i class="menu-icon flaticon-home"></i>
+                <li class="menu-item {{ request()->is('admin/index*') ? 'menu-item-active' : '' }}">
+                    <a  href="{{route('admin.index.index')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon flaticon2-graph-1"></i>
                         <span class="menu-text">شاخص ها</span>
                     </a>
                 </li>

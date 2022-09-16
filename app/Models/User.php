@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Functions\Avatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -29,14 +30,6 @@ class User extends Authenticatable
     public function last_login()    {return Jalalian::forge($this->last_login)->ago();}
     public function created_at()    {return Jalalian::forge($this->created_at)->format('%A, %d %B %Y');}
 
-    public function avatar($collection = 'avatar')
-    {
-        return  (strlen($this->getFirstMedia($collection)?->getUrl()) > 0
-            &&
-            file_exists( $this->getFirstMedia($collection)->getUrl()))
-            ? $this->getFirstMedia($collection)->getUrl()
-            : Avatar::{$this->gender}();
-    }
 
     public function gender()
     {
@@ -45,6 +38,10 @@ class User extends Authenticatable
             : 'خانم';
     }
 
+    public function avatar($collection = 'avatar')
+    {
+        return  Avatar::{$this->gender}() ;
+    }
 
     public function genderIcon()
     {
