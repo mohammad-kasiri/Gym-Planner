@@ -25,13 +25,15 @@ Route::group([ 'namespace'=>'App\Http\Controllers\Api\V1\\',
                 "prefix" => "v1" ,
                 'middleware' => ['auth:sanctum']
              ], function() {
-    Route::get("/types",        [TypeController::class, 'index'])        ->name("type.index");
-    Route::get("/equipments",   [EquipmentController::class, 'index'])   ->name("equipment.index");
-    Route::get("/muscles",      [MuscleController::class, 'index'])      ->name("muscle.index");
+    Route::get("/types",                    [TypeController::class, 'index'])        ->name("type.index");
+    Route::get("/equipments",               [EquipmentController::class, 'index'])   ->name("equipment.index");
+    Route::get("/muscles",                  [MuscleController::class, 'index'])      ->name("muscle.index");
 
-    Route::get("/exercises",    [ExerciseController::class, 'index'])    ->name("exercise.index");
-    Route::post("/exercises",   [ExerciseController::class, 'store'])    ->name("exercise.store");
+    Route::get("/exercises",                [ExerciseController::class, 'index'])    ->name("exercise.index");
+    Route::post("/exercises",               [ExerciseController::class, 'store'])    ->name("exercise.store");
 
-    Route::get("/routine",      [RoutineController::class, 'index'])     ->name("routine.index");
-    Route::post("/routine",     [RoutineController::class, 'store'])     ->name("routine.store");
+    Route::get("/routine",                  [RoutineController::class, 'index'])     ->name("routine.index");
+    Route::get("/routine/{routine_id}",     [RoutineController::class, 'show'])      ->name("routine.show");
+    Route::post("/routine",                 [RoutineController::class, 'store'])     ->name("routine.store");
+    Route::delete("/routine/{routine_id}",  [RoutineController::class, 'destroy'])   ->name("routine.destroy");
 });

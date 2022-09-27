@@ -13,4 +13,7 @@ class RoutineSet extends Model
     protected $casts = [
         'amount' => 'array',
     ];
+
+    public function routineItem()  {return $this->belongsTo(RoutineItem::class); }
+
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('routine_item_id');
             $table->foreign('routine_item_id')->references('id')->on('routine_items')->onDelete('cascade');
+
             $table->json('amount');
             $table->timestamps();
         });

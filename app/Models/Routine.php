@@ -13,4 +13,5 @@ class Routine extends Model
     protected $fillable=['user_id', 'title'];
 
     public function user()  {return $this->belongsTo(User::class); }
+    public function routineItems() {return $this->hasMany(RoutineItem::class); }
 }
