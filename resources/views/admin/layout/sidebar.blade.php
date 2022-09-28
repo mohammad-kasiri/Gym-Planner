@@ -66,6 +66,18 @@
                         <span class="menu-text">شاخص ها</span>
                     </a>
                 </li>
+                <li class="menu-item {{ request()->is('admin/muscle*') ? 'menu-item-active' : '' }}">
+                    <a  href="{{route('admin.muscle.index')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon flaticon2-rocket"></i>
+                        <span class="menu-text">عضله ها</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('admin/equipment*') ? 'menu-item-active' : '' }}">
+                    <a  href="{{route('admin.equipment.index')}}" class="menu-link menu-toggle">
+                        <i class="menu-icon flaticon2-box-1"></i>
+                        <span class="menu-text">تجهیزات</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!--end::Menu Container-->
