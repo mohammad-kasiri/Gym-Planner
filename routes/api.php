@@ -35,5 +35,6 @@ Route::group([ 'namespace'=>'App\Http\Controllers\Api\V1\\',
     Route::get("/routine",                  [RoutineController::class, 'index'])     ->name("routine.index");
     Route::get("/routine/{routine_id}",     [RoutineController::class, 'show'])      ->name("routine.show");
     Route::post("/routine",                 [RoutineController::class, 'store'])     ->name("routine.store");
+    Route::post("/routine/{routine_id}",    [RoutineController::class, 'update'])    ->name("routine.update");
     Route::delete("/routine/{routine_id}",  [RoutineController::class, 'destroy'])   ->name("routine.destroy");
 });

@@ -88,6 +88,58 @@ class RoutineController extends Controller
         ], 201);
     }
 
+    public function update($routine_id, Request $request)
+    {
+        $user = auth()->user();
+
+        // =================DELETE ROUTINE ================= //
+        $routine= Routine::query()
+            ->select(['id', 'title'])
+            ->where('id', $routine_id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+        DB::beginTransaction();
+        try {
+            $routine->forceDelete();
+            DB::commit();
+        }catch(Exception $e) {
+            DB::rollBack();
+        }
+
+        // =================Create Routine Again ================= //
+        DB::beginTransaction();
+        try {
+            $routine = new Routine;
+
+            $routine->id = $routine_id ;
+            $routine->user_id = $user->id;
+            $routine->title = $request->title;
+            $routine->save();
+
+            foreach ($request->exercises as $exercise) {
+                $routineItem = RoutineItem::query()->create([
+                    'routine_id' => $routine->id,
+                    'exercise_id' => $exercise['exercise_id'],
+                    'note' => $exercise['note'],
+                    'order' => $exercise['order'],
+                ]);
+
+                foreach ($exercise['sets'] as $set)
+                    RoutineSet::query()->create([
+                        'routine_item_id' => $routineItem->id,
+                        'amount' => $set,
+                    ]);
+            }
+            DB::commit();
+        }catch(Exception $e) {
+            DB::rollBack();
+        }
+
+        return response()->json([
+            'message' => 'Routine Updated Successfully'
+        ], 201);
+    }
+
     public function destroy($routine_id)
     {
         $user = auth()->user();
