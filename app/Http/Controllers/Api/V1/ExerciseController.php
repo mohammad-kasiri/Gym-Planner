@@ -12,7 +12,7 @@ class ExerciseController extends Controller
     public function index()
     {
         $exercises = Exercise::query()
-            ->select(['fa_title', 'en_title', 'keywords', 'type_id', 'equipment_id', 'primary_muscle_id', 'secondary_muscle_id'])
+            ->select(['id', 'fa_title', 'en_title', 'keywords', 'type_id', 'equipment_id', 'primary_muscle_id', 'secondary_muscle_id'])
             ->public()
             ->orWhere('user_id' , auth()->id())
             ->with('type:id,title')
