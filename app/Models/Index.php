@@ -10,6 +10,7 @@ class Index extends Model
     use HasFactory;
 
     protected  $fillable= ['title', 'unit'];
+    protected $hidden = ['pivot'];
 
     public function indices()
     {

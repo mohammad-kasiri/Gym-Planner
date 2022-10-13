@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
             $table->unsignedBigInteger('equipment_id');
             $table->unsignedBigInteger('primary_muscle_id');
-            $table->unsignedBigInteger('secondary_muscle_id');
+            $table->json('other_muscles');
 
             $table->string('fa_title' , 190)->nullable();
             $table->string('en_title' , 190)->nullable();

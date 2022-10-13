@@ -12,13 +12,16 @@ class ExerciseController extends Controller
     public function index()
     {
         $exercises = Exercise::query()
-            ->select(['id', 'fa_title', 'en_title', 'keywords', 'type_id', 'equipment_id', 'primary_muscle_id', 'secondary_muscle_id'])
+            ->select(['id', 'fa_title', 'en_title', 'keywords', 'type_id', 'equipment_id', 'primary_muscle_id', 'other_muscles'])
             ->public()
             ->orWhere('user_id' , auth()->id())
-            ->with('type:id,title')
+            ->with('type' , function ($query){
+                return $query->select('id','title')->with('indices', function ($q){
+                    return $q->select('id','title','unit')->get();
+                });
+            })
             ->with('equipment:id,title')
             ->with('primary_muscle:id,title')
-            ->with('secondary_muscle:id,title')
             ->with('media')
             ->get();
         return response()->json(['data' => $exercises], Response::HTTP_OK);
@@ -32,7 +35,7 @@ class ExerciseController extends Controller
             'type_id'               => ['required', 'exists:types,id'],
             'equipment_id'          => ['required', 'exists:equipment,id'],
             'primary_muscle_id'     => ['required', 'exists:muscles,id'],
-            'secondary_muscle_id'   => ['required', 'exists:muscles,id'],
+            'other_muscles'         => ['required', 'array'],
 
             'image'                 => ['nullable', 'image', 'max:2048']
         ]);
@@ -44,7 +47,7 @@ class ExerciseController extends Controller
            'type_id'             =>  $request->type_id,
            'equipment_id'        =>  $request->equipment_id,
            'primary_muscle_id'   =>  $request->primary_muscle_id,
-           'secondary_muscle_id' =>  $request->secondary_muscle_id,
+           'other_muscles'       =>  $request->other_muscles,
         ]);
 
         $exercise->setImage();

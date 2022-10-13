@@ -11,23 +11,17 @@ class Exercise extends Model
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = ['user_id', 'type_id', 'equipment_id', 'primary_muscle_id', 'secondary_muscle_id', 'fa_title', 'en_title', 'keywords', 'is_public'];
+    protected $fillable = ['user_id', 'type_id', 'equipment_id', 'primary_muscle_id', 'other_muscles', 'fa_title', 'en_title', 'keywords', 'is_public'];
+
+    protected $casts = [
+        'other_muscles' => 'array',
+    ];
 
     public function user()                 {return $this->belongsTo(User::class);}
     public function type()                 {return $this->belongsTo(Type::class);}
     public function equipment()            {return $this->belongsTo(Equipment::class);}
     public function primary_muscle()       {return $this->belongsTo(Muscle::class , 'primary_muscle_id');}
-    public function secondary_muscle()     {return $this->belongsTo(Muscle::class , 'secondary_muscle_id');}
 
-    //public function primary_muscles()      {return $this->belongsToMany(Muscle::class,
-    //                                                                    'exercise_primary_muscle',
-    //                                                                    'exercise_id',
-    //                                                                    'muscle_id');}
-//
-    //public function secondary_muscles()    {return $this->belongsToMany(Muscle::class,
-    //                                                                    'exercise_primary_muscle',
-    //                                                                    'exercise_id',
-    //                                                                    'muscle_id');}
 
     public function scopePublic($query)
     {

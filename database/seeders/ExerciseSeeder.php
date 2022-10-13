@@ -14,7 +14,7 @@ class ExerciseSeeder extends Seeder
                 'type_id' => 1,
                 'equipment_id' =>1,
                 'primary_muscle_id' => 1,
-                'secondary_muscle_id' => 2,
+                'other_muscles' => [2,3],
 
                 'fa_title' => 'ایروبیک',
                 'en_title' => 'Aerobics',
@@ -26,7 +26,7 @@ class ExerciseSeeder extends Seeder
                 'type_id' => 2,
                 'equipment_id' =>2,
                 'primary_muscle_id' => 2,
-                'secondary_muscle_id' => 3,
+                'other_muscles' => [2,3],
 
                 'fa_title' => 'بوکس',
                 'en_title' => 'Boxing',
