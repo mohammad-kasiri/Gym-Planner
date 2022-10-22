@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->string('note' , 350)->nullable();
             $table->integer('order')->default(0);
+            $table->integer('rest_timer')->default(0);
             $table->timestamps();
         });
     }

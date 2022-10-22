@@ -66,10 +66,11 @@ class RoutineController extends Controller
 
             foreach ($request->exercises as $exercise) {
                 $routineItem = RoutineItem::query()->create([
-                    'routine_id' => $routine->id,
+                    'routine_id'  => $routine->id,
                     'exercise_id' => $exercise['exercise_id'],
-                    'note' => $exercise['note'],
-                    'order' => $exercise['order'],
+                    'note'        => $exercise['note'],
+                    'order'       => $exercise['order'],
+                    'rest_timer'  => $exercise['rest_timer'],
                 ]);
 
                 foreach ($exercise['sets'] as $set)
