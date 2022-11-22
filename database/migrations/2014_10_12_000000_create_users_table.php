@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('plan_id')->nullable();
-            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
+            $table->foreign('plan_id')->references('id')->on('plans');
 
             $table->timestamp('plan_expire_at')->nullable();
 
