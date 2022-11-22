@@ -22,7 +22,11 @@ class RoutineController extends Controller
                 return $q->select(['id' , 'exercise_id', 'routine_id', 'note', 'order'])
 
                     ->with('exercise', function ($q) {              // With Exercise Of Each Item
-                        return $q->select(['id' , 'type_id', 'fa_title', 'en_title', 'keywords']);
+                        return $q->select(['id' , 'type_id', 'fa_title', 'en_title', 'keywords'])->with('type' , function ($query){
+                            return $query->select('id','title')->with('indices', function ($q){
+                                return $q->select('id','title','unit')->get();
+                            });
+                        });
                     })
 
                     ->with('routineSets', function ($q) {           // With Routine Sets Of Each Item
@@ -39,7 +43,7 @@ class RoutineController extends Controller
             ->where('id', $routine_id)
             ->where('user_id', auth()->id())
             ->with('routineItems', function ($q) {    //With Items
-                return $q->select(['id' , 'exercise_id', 'routine_id', 'note', 'order'])
+                return $q->select(['id' , 'exercise_id', 'routine_id', 'note', 'order', 'rest_timer'])
 
                     ->with('exercise', function ($q) {              // With Exercise Of Each Item
                         return $q->select(['id' , 'type_id', 'fa_title', 'en_title', 'keywords']);
@@ -123,6 +127,7 @@ class RoutineController extends Controller
                     'exercise_id' => $exercise['exercise_id'],
                     'note' => $exercise['note'],
                     'order' => $exercise['order'],
+                    'rest_timer' => $exercise['rest_timer'],
                 ]);
 
                 foreach ($exercise['sets'] as $set)
