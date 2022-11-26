@@ -35,7 +35,7 @@ class ExerciseController extends Controller
             'type_id'               => ['required', 'exists:types,id'],
             'equipment_id'          => ['required', 'exists:equipment,id'],
             'primary_muscle_id'     => ['required', 'exists:muscles,id'],
-            'other_muscles'         => ['required', 'array'],
+            'other_muscles'         => ['array'],
 
             'image'                 => ['nullable', 'image', 'max:2048']
         ]);
